@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       ">
+
+
+<!--
+    <context:property-placeholder location="http://localhost:8080/test1.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="http://localhost:8080/test2.properties" />
+-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.github.mpashka.spring.config.beans"/>
+
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
+
+    <bean id="scheduledExecutorService" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean">
+        <property name="poolSize" value="1"/>
+        <property name="threadNamePrefix" value="Periodical-Tasks-"/>
+        <!--This is important, because log flushing jobs could be in progress-->
+        <property name="waitForTasksToCompleteOnShutdown" value="true"/>
+        <property name="continueScheduledExecutionAfterException" value="true"/>
+    </bean>
+
+    <!-- Used to reload configuration -->
+    <bean id="configurationSource" class="com.github.mpashka.spring.config.EnvironmentConfigurationSource">
+        <constructor-arg name="executorService" type="java.util.concurrent.ScheduledExecutorService" ref="scheduledExecutorService"/>
+        <constructor-arg name="periodMs" type="long" value="350" />
+        <constructor-arg name="sourceUrls" type="java.util.List">
+            <list>
+                <value>http://localhost:8080/test1.properties</value>
+                <value>http://localhost:8080/test2.properties</value>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="reloadableConfigurationSupport" class="com.github.mpashka.spring.config.ReloadableConfigurationSupport"/>
+
+
+    <bean id="xmlParent" class="com.github.mpashka.spring.config.beans.PropsBeanParentXml" abstract="true">
+        <property name="p3" value="${p3}"/>
+        <property name="p4" value="${p4}"/>
+        <property name="checkNoGetter" value="${noGetter}"/>
+    </bean>
+
+    <bean id="xml1" class="com.github.mpashka.spring.config.beans.PropsBeanChildXml" parent="xmlParent">
+        <property name="s5" value="${s5}"/>
+        <property name="p6ref" ref="${p6ref}"/>
+        <property name="childXml">
+            <bean class="com.github.mpashka.spring.config.beans.PropsBeanValueXml" >
+                <property name="p7" value="${p7}" />
+            </bean>
+        </property>
+        <property name="childXmlList">
+            <list>
+                <bean class="com.github.mpashka.spring.config.beans.PropsBeanValueXml" >
+                    <property name="p9" value="${p9}" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="xmlMix" class="com.github.mpashka.spring.config.beans.PropsBeanMix" >
+        <property name="p3" value="${p3}"/>
+        <property name="p4" value="${p4}"/>
+        <property name="s5x" value="${s5}"/>
+        <property name="p6refx" ref="${p6ref}"/>
+    </bean>
+
+
+    <bean id="ref1" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="Ref1"/>
+    </bean>
+
+    <bean id="ref2" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="Ref2"/>
+    </bean>
+
+</beans>

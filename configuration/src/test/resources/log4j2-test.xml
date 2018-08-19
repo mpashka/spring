@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss,SSS} %-5p [%10.10t] %30.30c - %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+
+        <Logger name="com.github.mpashka.spring.config" level="all"/>
+
+        <Root level="info">
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>

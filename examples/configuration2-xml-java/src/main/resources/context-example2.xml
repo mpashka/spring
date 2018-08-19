@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       ">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.github.mpashka.spring.config.examples.xmljava2"/>
+
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
+    <bean id="scheduledExecutorService" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean">
+        <property name="poolSize" value="1"/>
+        <property name="threadNamePrefix" value="Periodical-Tasks-"/>
+        <!--This is important, because log flushing jobs could be in progress-->
+        <property name="waitForTasksToCompleteOnShutdown" value="true"/>
+        <property name="continueScheduledExecutionAfterException" value="true"/>
+    </bean>
+
+    <!-- Used to reload configuration -->
+    <bean id="configurationSource" class="com.github.mpashka.spring.config.EnvironmentConfigurationSource">
+        <constructor-arg name="executorService" type="java.util.concurrent.ScheduledExecutorService" ref="scheduledExecutorService"/>
+        <constructor-arg name="periodMs" type="long" value="3000" />
+        <constructor-arg name="sourceUrls" type="java.util.List">
+            <list>
+                <value>file:tmp/props1.properties</value>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="reloadableConfigurationSupport" class="com.github.mpashka.spring.config.ReloadableConfigurationSupport"/>
+
+
+    <bean id="myXmlBean1" class="com.github.mpashka.spring.config.examples.xmljava2.XmlBean1">
+        <property name="intProperty" value="${bean1.int}"/>
+        <property name="stringProperty" value="${bean1.string}"/>
+        <property name="inner1">
+            <bean class="com.github.mpashka.spring.config.examples.xmljava2.MyInnerBean">
+                <property name="innerInt" value="${inner1.int}"/>
+                <property name="innerString" value="${inner1.string}"/>
+            </bean>
+        </property>
+        <property name="inner2" ref="myInner2"/>
+    </bean>
+
+    <bean id="myInner2" class="com.github.mpashka.spring.config.examples.xmljava2.MyInnerBean">
+        <property name="innerInt" value="${inner2.int}"/>
+        <property name="innerString" value="${inner2.string}"/>
+    </bean>
+
+    <bean id="myInner3" class="com.github.mpashka.spring.config.examples.xmljava2.MyInnerBean">
+        <property name="innerInt" value="${inner3.int}"/>
+        <property name="innerString" value="${inner3.string}"/>
+    </bean>
+
+
+</beans>
