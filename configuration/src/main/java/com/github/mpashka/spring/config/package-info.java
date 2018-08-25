@@ -14,7 +14,7 @@
  * {@link org.springframework.beans.factory.config.PlaceholderConfigurerSupport#doProcessProperties(org.springframework.beans.factory.config.ConfigurableListableBeanFactory, org.springframework.util.StringValueResolver)},
  * {@link org.springframework.beans.factory.config.ConfigurableBeanFactory#addEmbeddedValueResolver(org.springframework.util.StringValueResolver)}
  *
- * Embedded resolver is used later to update values after properties update - {@link com.github.mpashka.spring.config.ReloadableBeanPropertyRepository.BeanProperty#setBeanPropertyValue(java.lang.Object, java.lang.String)}
+ * Embedded resolver is used later to update values after properties update - @link com.github.mpashka.spring.config.ReloadableBeanPropertyRepository.BeanProperty#setBeanPropertyValue(java.lang.Object, java.lang.String)
  *
  * {@link com.github.mpashka.spring.config.ReloadableConfigurationSupport} cycle through
  * {@link org.springframework.beans.factory.config.ConfigurableListableBeanFactory}, find all XML beans with properties with placeholders,

@@ -30,7 +30,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * Checks spring environment, periodically updates configuration
  *
- * PropertySource -> ResourcePropertySource
  */
 public class EnvironmentConfigurationSource implements PriorityOrdered, BeanFactoryPostProcessor, EnvironmentAware, ApplicationContextAware {
 
@@ -63,6 +62,7 @@ public class EnvironmentConfigurationSource implements PriorityOrdered, BeanFact
 
     /**
      * Should go before {@link PropertyResourceConfigurer#order} and before {@link ReloadableConfigurationSupport}
+     * @param order spring init order
      * @see ReloadableConfigurationSupport#setOrder(int)
      */
     @SuppressWarnings("unused")

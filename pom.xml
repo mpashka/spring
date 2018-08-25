@@ -114,6 +114,10 @@
             <id>release</id>
             <build>
                 <plugins>
+                    <!--
+                    Doesn't work - seems to be outdated
+                    Execution default of goal com.github.github:downloads-maven-plugin:0.6:upload failed: An API incompatibility was encountered while executing com.github.github:downloads-maven-plugin:0.6:upload: java.lang.NoSuchMethodError: org.apache.maven.execution.MavenSession.getRepositorySession()Lorg/sonatype/aether/RepositorySystemSession;
+
                     <plugin>
                         <groupId>com.github.github</groupId>
                         <artifactId>downloads-maven-plugin</artifactId>
@@ -133,6 +137,7 @@
                             </execution>
                         </executions>
                     </plugin>
+                    -->
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -221,7 +226,6 @@
 
     <modules>
         <module>configuration</module>
-        <module>examples</module>
     </modules>
 
 </project>

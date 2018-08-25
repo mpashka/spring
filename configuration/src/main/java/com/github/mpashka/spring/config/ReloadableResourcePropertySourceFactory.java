@@ -8,7 +8,8 @@ import org.springframework.core.io.support.PropertySourceFactory;
 import java.io.IOException;
 
 /**
- *
+ * Factory for the {@link PropertySource}. Can be used in java spring configuration
+ * in {@link org.springframework.context.annotation.PropertySource} section.
  */
 public class ReloadableResourcePropertySourceFactory implements PropertySourceFactory {
 

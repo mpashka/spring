@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- *
+ * {@link PropertySource} resource implementation that can reload
+ * resource content
  */
 public class ReloadableResourcePropertySource extends PropertySource<EncodedResource> {
 

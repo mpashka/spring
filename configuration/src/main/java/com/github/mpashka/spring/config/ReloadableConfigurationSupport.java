@@ -28,7 +28,7 @@ import java.util.Map;
  *
  * See {@link #setOrder(int)} for order notes
  *
- * @implNote following scenarios are still not supported -> re-buildable collections if the property placeholder specifies item value or item is another bean reference
+ * implNote following scenarios are still not supported - re-buildable collections if the property placeholder specifies item value or item is another bean reference
  * @author Pavel Moukhataev
  */
 public class ReloadableConfigurationSupport implements PriorityOrdered, BeanFactoryPostProcessor, ApplicationListener<ConfigurationUpdatedEvent> {
@@ -64,6 +64,7 @@ public class ReloadableConfigurationSupport implements PriorityOrdered, BeanFact
      * on {@link BeanFactoryPostProcessor#postProcessBeanFactory(org.springframework.beans.factory.config.ConfigurableListableBeanFactory)}
      * So this bean must be initiated before {@link org.springframework.context.support.PropertySourcesPlaceholderConfigurer}.
      *
+     * @param order spring init order
      * @see EnvironmentConfigurationSource#setOrder(int)
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
@@ -99,7 +100,7 @@ public class ReloadableConfigurationSupport implements PriorityOrdered, BeanFact
     /**
      * Parse bean definitions for beans and embedded beans - this is for XML config
      *
-     * Note: see list of all value types {@link org.springframework.beans.factory.support.BeanDefinitionValueResolver#resolveValueIfNecessary}
+     * Note: see list of all value types {@link org.springframework.beans.factory.support.BeanDefinitionValueResolver#resolveValueIfNecessary(Object, Object)}
      */
     private void scanBeanDefinition(String beanName, BeanDefinition beanDefinition) {
         beanDefinition.getPropertyValues()

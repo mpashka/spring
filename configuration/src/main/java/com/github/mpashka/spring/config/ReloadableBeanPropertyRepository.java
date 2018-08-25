@@ -3,18 +3,13 @@ package com.github.mpashka.spring.config;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.PropertyValue;
-import org.springframework.beans.factory.config.BeanExpressionContext;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.config.TypedStringValue;
+import org.springframework.beans.TypeConverter;
+import org.springframework.beans.factory.config.*;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * List of properties that are to be reloaded on configuration update
@@ -150,7 +145,7 @@ class ReloadableBeanPropertyRepository {
         }
 
         /**
-         * See {@link org.springframework.beans.factory.support.DefaultListableBeanFactory#doResolveDependency}
+         * See {@link org.springframework.beans.factory.support.DefaultListableBeanFactory#doResolveDependency(DependencyDescriptor, String, Set, TypeConverter)}
          */
         void update() {
             String value = beanFactory.resolveEmbeddedValue(this.definedValue);
