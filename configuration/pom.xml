@@ -326,8 +326,12 @@
 
                     <!--
                     Can be used instead of sonatype nexus-staging-maven-plugin
-                    mvn release:clean release:prepare
-                    mvn release:perform
+                    mvn release:clean release:prepare -pl configuration -P release
+                    mvn release:perform -pl configuration -P release
+
+                    Nexus release:
+                    cd target/checkout
+                    mvn nexus-staging:release
                     -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>

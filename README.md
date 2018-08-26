@@ -1,6 +1,16 @@
 This project is intended to provide spring configuraion that can be dynamically
 reloaded
 
+#### Maven dependency
+```xml
+<dependency>
+    <groupId>com.github.mpashka.spring</groupId>
+    <artifactId>configuration</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+#### Spring context modification
 In order to use this one several beans must be configured in spring context:
 * <b>PropertySourcesPlaceholderConfigurer</b> - core spring class to configure spring placeholder
 * <b>EnvironmentConfigurationSource</b> - thing to watch and reload configuration files
