@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.mpashka.spring</groupId>
     <artifactId>configuration</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
 
     <name>Spring dynamic configuration</name>
@@ -43,7 +43,7 @@
         <url>https://github.com/mpashka/spring</url>
         <connection>scm:git://github.com:mpashka/spring.git</connection>
         <developerConnection>scm:git:git@github.com:mpashka/spring.git</developerConnection>
-        <tag>configuration-1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
 
