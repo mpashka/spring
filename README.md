@@ -1,6 +1,8 @@
 This project is intended to provide spring configuraion that can be dynamically
 reloaded
 
+Inspired by [wuenschenswert.net](http://www.wuenschenswert.net/wunschdenken/archives/127)
+
 #### Maven dependency
 ```xml
 <dependency>
